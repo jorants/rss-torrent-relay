@@ -53,7 +53,12 @@ db_classes = BaseModel.__subclasses__()
 db.create_tables(db_classes)
 
 
-admin = flask_admin.Admin(app, name='microblog', template_mode='bootstrap3',url="/admin/"+app.config["URL_KEY"])
+admin = flask_admin.Admin(
+    app,
+    name="microblog",
+    template_mode="bootstrap3",
+    url="/admin/" + app.config["URL_KEY"],
+)
 admin.add_view(ModelView(Show))
 admin.add_view(ModelView(Episode))
 
@@ -78,6 +83,7 @@ def parse_title(title):
 
         return parsed
 
+
 def match_tags(formats, tags):
 
     for f in formats:
@@ -96,11 +102,15 @@ def update_feed():
         if episodeinfo == None:
             continue
 
-
-        if Show.select().where(Show.name == episodeinfo["show"]).count() > 0 and match_tags(app.config["TAGS"],episodeinfo["tags"]):
+        if Show.select().where(
+            Show.name == episodeinfo["show"]
+        ).count() > 0 and match_tags(app.config["TAGS"], episodeinfo["tags"]):
 
             show = Show.get(Show.name == episodeinfo["show"])
-            if (show.last_season, show.last_episode) < (episodeinfo["season"],episodeinfo["episode"]):
+            if (show.last_season, show.last_episode) < (
+                episodeinfo["season"],
+                episodeinfo["episode"],
+            ):
                 show.last_season = episodeinfo["season"]
                 show.last_episode = episodeinfo["episode"]
                 show.save()
