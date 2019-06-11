@@ -93,7 +93,6 @@ def update_feed():
         title = entry["title"]
         date = entry.published
         episodeinfo = parse_title(title)
-        print(episodeinfo)
         if episodeinfo == None:
             continue
 
@@ -122,7 +121,7 @@ scheduler.add_job(func=update_feed, trigger="interval", minutes=30)
 scheduler.start()
 atexit.register(lambda: scheduler.shutdown())
 
-print("/feed/" + app.config["URL_KEY"])
+
 @app.route("/feed/" + app.config["URL_KEY"])
 def feed():
     update_feed()
