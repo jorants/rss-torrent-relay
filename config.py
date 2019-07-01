@@ -12,7 +12,7 @@ class Config(object):
     # list of regexes that parses a torrent name
     # tags should be a space seperated list of tags at the moment.
     PARSE_RE = [
-        r"^(?P<show>.*) s(?P<season>[0-9][0-9])e(?P<episode>[0-9][0-9])(?P<tags>[\w ]*)-.*$"
+        r"^(?P<show>.*) s(?P<season>[0-9][0-9])e(?P<episode>[0-9][0-9])(?P<tags>[\w\- ]*)-.*$"
     ]
 
     # Shows you want
