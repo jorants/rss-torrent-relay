@@ -68,6 +68,7 @@ admin.add_view(ModelView(Episode))
 def parse_title(title):
 
     title = title.lower().replace(".", " ")
+
     parts = re.search(app.config['PARSE_RE'], title)
 
     if parts != None:
