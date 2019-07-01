@@ -63,13 +63,12 @@ admin.add_view(ModelView(Show))
 admin.add_view(ModelView(Episode))
 
 
-PARSE_RE = r"^(?P<show>.*) s(?P<season>[0-9][0-9])e(?P<episode>[0-9][0-9])(?P<tags>[\w ]*)-(?P<uploader>.*)$"
 
 
 def parse_title(title):
 
     title = title.lower().replace(".", " ")
-    parts = re.search(PARSE_RE, title)
+    parts = re.search(app.config['PARSE_RE'], title)
 
     if parts != None:
         parsed = parts.groupdict()
